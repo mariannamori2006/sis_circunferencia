@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="keywords" content="circunferencia, sistema, base de datos">
     <meta name="author" content="Marianna Mori">
 
-    <link rel="icon" href="../imagenes/icono.png">
+    <link rel="icon" href="../imagenes/icono.ico">
     <link rel="stylesheet" href="../assetes/css/style.css">
 
     <title>Circunferencia</title>
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <div class="caja">
             <form action="" method="post" id="frmLogin">
-                <img src="../imagenes/logo.png" alt="logo onstituciones">
+                <img src="../imagenes/logo.jpg" alt="logo onstituciones">
                 <input type="email" name="correo" id="correo" placeholder="Correo">
                 <input type="password" name="clave" id="clave" placeholder="Clave">
                 <button type="submit" id="btnIngresar">Ingesar</button>
