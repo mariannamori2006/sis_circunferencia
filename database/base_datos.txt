@@ -1,0 +1,42 @@
+-- Base de datos para calcular el área y perímetro
+-- de una circunferencia.
+CREATE DATABASE IF NOT EXISTS `circunferencia_db2`
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE `circunferencia_db2`;
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id_usuario` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(150) NOT NULL DEFAULT '',
+  `correo` VARCHAR(255) NOT NULL,
+  `clave` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `uq_usuario_correo` (`correo`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+-- Tabla de circunferencias calculadas
+CREATE TABLE IF NOT EXISTS `circunferencia` (
+  `id_circunferencia` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `detalle` TEXT NULL,
+  `radio` DOUBLE NOT NULL,
+  `area` DOUBLE NOT NULL,
+  `perimetro` DOUBLE NOT NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_circunferencia`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+-- Usuario inicial
+-- Cambiar esta contraseña después de ingresar.
+INSERT INTO `usuario` (`nombre`, `correo`, `clave`)
+SELECT 'Administrador', 'mari@gmail', '123'
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM `usuario`
+  WHERE `correo` = 'mari@gmail'
+);
