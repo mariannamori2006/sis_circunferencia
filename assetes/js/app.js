@@ -17,31 +17,30 @@
  
 }); */
 
-function calcularCuadrado() {
-    const ladoInput = document.getElementById('txtLado');
-    const areaInput = document.getElementById('txtA');
-    const perimetroInput = document.getElementById('txtP');
+function calcularCircunferencia() {
+    const campoRadio = document.getElementById('txtRadio');
+    const campoArea = document.getElementById('txtA');
+    const campoPerimetro = document.getElementById('txtP');
 
-    if (!ladoInput || !areaInput || !perimetroInput) {
+    const radio = Number(campoRadio.value);
+
+    if (
+        campoRadio.value.trim() === '' ||
+        !Number.isFinite(radio) ||
+        radio <= 0
+    ) {
+        alert('Ingrese un radio válido mayor que cero.');
+
+        campoRadio.focus();
+        campoArea.value = '';
+        campoPerimetro.value = '';
+
         return;
     }
 
-    const lado = parseFloat(ladoInput.value);
+    const area = Math.PI * Math.pow(radio, 2);
+    const perimetro = 2 * Math.PI * radio;
 
-    if (isNaN(lado) || lado <= 0) {
-        alert('Ingrese un lado válido mayor a cero');
-        ladoInput.focus();
-        return;
-    }
-
-    areaInput.value = (lado * lado).toFixed(2);
-    perimetroInput.value = (lado * 4).toFixed(2);
+    campoArea.value = area.toFixed(4);
+    campoPerimetro.value = perimetro.toFixed(4);
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    const ladoInput = document.getElementById('txtLado');
-
-    if (ladoInput) {
-        ladoInput.addEventListener('input', calcularCuadrado);
-    }
-});
