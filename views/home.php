@@ -50,7 +50,10 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
     >
     <meta name="author" content="BC TECH">
 
-    <link rel="icon" href="../imagenes/icono.png">
+    <link rel="icon" href="../imagenes/icono.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600&display=swap">
     <link rel="stylesheet" href="../assetes/css/style_home.css">
 
     <title>Circunferencia - Inicio</title>
@@ -61,7 +64,7 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
     <div class="lineaSup">
         <div class="logo-links">
             <div class="logo">
-                <img src="../imagenes/logo.png" alt="Logo">
+                <img src="../imagenes/logo.jpg" alt="Logo">
                 <h1>Matemáticas</h1>
             </div>
 
@@ -70,16 +73,17 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
 
         <div class="buscarHeader">
             <form action="home.php" method="get" class="form1">
-                <img src="../imagenes/logo.png" alt="Buscar">
+                <span class="campoBuscar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+                    <input
+                        type="text"
+                        name="buscar"
+                        placeholder="Buscar por radio"
+                        value="<?= htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8') ?>"
+                    >
+                </span>
 
-                <button type="submit">Buscar</button>
-
-                <input
-                    type="text"
-                    name="buscar"
-                    placeholder="BUSCAR"
-                    value="<?= htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8') ?>"
-                >
+                <button type="submit" class="btnBuscar">Buscar</button>
             </form>
         </div>
     </div>
@@ -195,6 +199,7 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
             <div class="botones">
                 <button
                     type="button"
+                    class="btn btn-calcular"
                     onclick="calcularCircunferencia();"
                 >
                     Calcular
@@ -204,7 +209,12 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
                     Cancelar
                 </a>
 
-                <button type="submit" name="accion" value="guardar">
+                <button
+                    type="submit"
+                    class="btn btn-guardar"
+                    name="accion"
+                    value="guardar"
+                >
                     <?= $idActual !== '' ? 'Actualizar' : 'Guardar' ?>
                 </button>
             </div>
@@ -213,16 +223,17 @@ $perimetroActual = $registroEditar['perimetro'] ?? '';
 
     <div class="buscar">
         <form action="home.php" method="get" id="frmBuscar">
-            <img src="../imagenes/logo.png" alt="Buscar">
+            <span class="campoBuscar">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+                <input
+                    type="text"
+                    name="buscar"
+                    placeholder="Buscar por radio"
+                    value="<?= htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8') ?>"
+                >
+            </span>
 
-            <button type="submit">Buscar</button>
-
-            <input
-                type="text"
-                name="buscar"
-                placeholder="Buscar por radio"
-                value="<?= htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8') ?>"
-            >
+            <button type="submit" class="btnBuscar">Buscar</button>
 
             <a class="btn-link limpiar" href="home.php">Limpiar</a>
         </form>
