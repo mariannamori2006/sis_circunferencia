@@ -1,11 +1,10 @@
 /* ============================== */
-/*       LOGIN - ROSA CLARO       */
+/*   LOGIN v1.2 - PANEL DIVIDIDO  */
 /* ============================== */
 
 :root {
     --fondo: #FDF5F5;
     --fondo-2: #FFF8FA;
-    --tarjeta: #FFFFFF;
     --primario: #C97899;
     --primario-oscuro: #AD587B;
     --secundario: #F3DCE6;
@@ -16,7 +15,7 @@
     --blanco: #FFFFFF;
     --error: #B3405F;
     --error-fondo: #FCEAF0;
-    --sombra: 0 24px 60px rgba(160, 92, 121, 0.16);
+    --sombra: 0 28px 70px rgba(160, 92, 121, 0.2);
     --fuente: 'DM Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --fuente-titulo: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
@@ -35,109 +34,146 @@ body {
         radial-gradient(circle at top left, rgba(201, 120, 153, 0.14), transparent 35%),
         radial-gradient(circle at bottom right, rgba(243, 220, 230, 0.75), transparent 35%),
         var(--fondo);
-    overflow-x: hidden;
 }
 
-/* ---------- Contenedor + anillos concéntricos ---------- */
-.caja {
-    position: relative;
+main {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 25px;
-    isolation: isolate;
 }
 
-/* Circunferencias decorativas detrás de la tarjeta */
-.caja::before {
-    content: "";
+/* ---------- Tarjeta de dos paneles ---------- */
+.caja {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: min(960px, 100%);
+    min-height: 580px;
+
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+/* ---------- Panel izquierdo ---------- */
+.panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 44px 40px;
+    overflow: hidden;
+
+    color: var(--blanco);
+    background: linear-gradient(155deg, var(--primario) 0%, var(--primario-oscuro) 100%);
+}
+
+.panel h2 {
+    position: relative;
+    z-index: 1;
+    max-width: 16ch;
+    font-family: var(--fuente-titulo);
+    font-size: 31px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.formulas {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulas p {
+    width: fit-content;
+    padding: 10px 20px;
+
+    font-family: var(--fuente-titulo);
+    font-size: 24px;
+    font-weight: 600;
+
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+/* Circunferencia dibujada (cortada por la esquina) */
+.dibujo {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 900px;
-    height: 900px;
-    max-width: 160vw;
-    max-height: 160vw;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(circle,
-            transparent 0 27%,
-            rgba(201, 120, 153, 0.22) 27% 27.3%,
-            transparent 27.3% 38%,
-            rgba(201, 120, 153, 0.16) 38% 38.25%,
-            transparent 38.25% 49%,
-            rgba(201, 120, 153, 0.10) 49% 49.2%,
-            transparent 49.2%);
+    right: -90px;
+    bottom: -90px;
+    width: 340px;
+    height: 340px;
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.4);
+    stroke-width: 1.5;
 }
 
-/* Un disco suave que se asoma en la esquina de la tarjeta */
-.caja::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 170px;
-    height: 170px;
-    margin: -300px 0 0 120px;
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
-    background: linear-gradient(135deg, var(--secundario), rgba(201, 120, 153, 0.35));
-    opacity: 0.8;
+.dibujo .radio {
+    stroke: var(--blanco);
+    stroke-width: 2.5;
+    stroke-linecap: round;
 }
 
-/* ---------- Tarjeta ---------- */
+.dibujo .centro {
+    fill: var(--blanco);
+    stroke: none;
+}
+
+.dibujo text {
+    fill: var(--blanco);
+    stroke: none;
+    font-family: var(--fuente-titulo);
+    font-size: 22px;
+    font-style: italic;
+}
+
+/* ---------- Formulario ---------- */
 .caja form {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-
-    width: min(430px, 100%);
-    padding: 42px 38px 38px;
-
-    background: rgba(255, 255, 255, 0.92);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--borde);
-    border-radius: 28px;
-    box-shadow: var(--sombra);
+    justify-content: center;
+    padding: 44px 46px;
 }
 
 form img {
-    align-self: center;
-    width: 120px;
-    height: 120px;       
-    object-fit: cover; 
-    border-radius: 50%;  
-    padding: 5px;
+    align-self: flex-start;
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 4px;
+    margin-bottom: 20px;
     background: var(--blanco);
-    box-shadow: 0 0 0 1px var(--borde), 0 10px 22px rgba(201, 120, 153, 0.2);
-    margin-bottom: 22px;
+    box-shadow: 0 0 0 1px var(--borde), 0 8px 18px rgba(201, 120, 153, 0.2);
 }
 
 form h1 {
     font-family: var(--fuente-titulo);
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 600;
-    text-align: center;
     letter-spacing: -0.01em;
     color: var(--texto);
 }
 
 .subtitulo {
-    margin: 8px auto 26px;
-    max-width: 30ch;
-    font-size: 14.5px;
+    margin: 6px 0 26px;
+    font-size: 15px;
     line-height: 1.5;
-    text-align: center;
     color: var(--texto-suave);
 }
 
-/* ---------- Mensaje de error ---------- */
+/* ---------- Error ---------- */
 .error {
     display: flex;
     align-items: center;
@@ -159,7 +195,11 @@ form h1 {
     flex: none;
     width: 20px;
     height: 20px;
+    fill: none;
     stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 @keyframes sacudir {
@@ -188,7 +228,6 @@ form h1 {
     align-items: center;
 }
 
-/* Iconos (SVG de línea) */
 .entrada svg {
     fill: none;
     stroke: var(--texto-suave);
@@ -227,7 +266,6 @@ form input {
     transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-form input[type="password"],
 form input#clave {
     padding-right: 50px;
 }
@@ -246,7 +284,6 @@ form input:focus {
     box-shadow: 0 0 0 4px rgba(201, 120, 153, 0.15);
 }
 
-/* Botón de ver clave */
 .ojo {
     position: absolute;
     right: 6px;
@@ -280,7 +317,7 @@ form input:focus {
     outline-offset: 1px;
 }
 
-/* ---------- Botón principal ---------- */
+/* ---------- Botón ---------- */
 #btnIngresar {
     width: 100%;
     min-height: 54px;
@@ -315,29 +352,66 @@ form input:focus {
     outline-offset: 3px;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 760px) {
-    .caja {
+/* ---------- Tablet y móvil: el panel pasa arriba ---------- */
+@media (max-width: 820px) {
+    main {
         padding: 18px;
     }
 
-    .caja form {
-        padding: 34px 26px 30px;
+    .caja {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        min-height: auto;
     }
 
-    .caja::after {
-        display: none;
+    .panel {
+        padding: 28px 26px;
+        gap: 16px;
+    }
+
+    .panel h2 {
+        max-width: none;
+        font-size: 22px;
+    }
+
+    .formulas {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .formulas p {
+        padding: 7px 16px;
+        font-size: 19px;
+    }
+
+    .dibujo {
+        width: 220px;
+        height: 220px;
+        right: -70px;
+        bottom: -80px;
+    }
+
+    .caja form {
+        padding: 32px 26px 30px;
+    }
+
+    form img {
+        width: 72px;
+        height: 72px;
     }
 }
 
 @media (max-width: 380px) {
-    .caja form {
-        padding: 28px 18px;
+    .caja {
         border-radius: 22px;
     }
 
+    .caja form {
+        padding: 28px 18px;
+    }
+
     form h1 {
-        font-size: 27px;
+        font-size: 28px;
     }
 
     form input,
@@ -346,13 +420,8 @@ form input:focus {
         min-height: 50px;
         font-size: 15px;
     }
-
-    form img {
-        width: 90px;
-    }
 }
 
-/* Respeta a quienes prefieren menos movimiento */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation: none !important;
