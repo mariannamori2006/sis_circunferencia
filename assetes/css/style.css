@@ -1,4 +1,3 @@
-
 /* ============================== */
 /*       LOGIN - ROSA CLARO       */
 /* ============================== */
@@ -15,7 +14,11 @@
     --texto-suave: #957789;
     --borde: #EBD5DF;
     --blanco: #FFFFFF;
-    --sombra: 0 18px 45px rgba(160, 92, 121, 0.13);
+    --error: #B3405F;
+    --error-fondo: #FCEAF0;
+    --sombra: 0 24px 60px rgba(160, 92, 121, 0.16);
+    --fuente: 'DM Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --fuente-titulo: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
 
 * {
@@ -26,71 +29,191 @@
 
 body {
     min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--fuente);
     color: var(--texto);
-
     background:
-        radial-gradient(
-            circle at top left,
-            rgba(201, 120, 153, 0.14),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(243, 220, 230, 0.75),
-            transparent 35%
-        ),
+        radial-gradient(circle at top left, rgba(201, 120, 153, 0.14), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(243, 220, 230, 0.75), transparent 35%),
         var(--fondo);
+    overflow-x: hidden;
 }
 
+/* ---------- Contenedor + anillos concéntricos ---------- */
 .caja {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 25px;
+    isolation: isolate;
 }
 
-/* Tarjeta principal */
+/* Circunferencias decorativas detrás de la tarjeta */
+.caja::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 900px;
+    height: 900px;
+    max-width: 160vw;
+    max-height: 160vw;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle,
+            transparent 0 27%,
+            rgba(201, 120, 153, 0.22) 27% 27.3%,
+            transparent 27.3% 38%,
+            rgba(201, 120, 153, 0.16) 38% 38.25%,
+            transparent 38.25% 49%,
+            rgba(201, 120, 153, 0.10) 49% 49.2%,
+            transparent 49.2%);
+}
+
+/* Un disco suave que se asoma en la esquina de la tarjeta */
+.caja::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    height: 170px;
+    margin: -300px 0 0 120px;
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(135deg, var(--secundario), rgba(201, 120, 153, 0.35));
+    opacity: 0.8;
+}
+
+/* ---------- Tarjeta ---------- */
 .caja form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
 
-    width: min(420px, 100%);
-    min-height: 480px;
-    padding: 40px 35px;
+    width: min(430px, 100%);
+    padding: 42px 38px 38px;
 
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--borde);
-    border-radius: 26px;
+    border-radius: 28px;
     box-shadow: var(--sombra);
-
-    transition: box-shadow 0.3s ease;
 }
 
-.caja form:hover {
-    box-shadow: 0 22px 50px rgba(160, 92, 121, 0.18);
-}
-
-/* Imagen central */
 form img {
-    width: 145px;
-    max-width: 100%;
-    margin-bottom: 25px;
-
-    filter: drop-shadow(
-        0 8px 12px rgba(201, 120, 153, 0.15)
-    );
+    align-self: center;
+    width: 120px;
+    height: 120px;       
+    object-fit: cover; 
+    border-radius: 50%;  
+    padding: 5px;
+    background: var(--blanco);
+    box-shadow: 0 0 0 1px var(--borde), 0 10px 22px rgba(201, 120, 153, 0.2);
+    margin-bottom: 22px;
 }
 
-/* Campos de texto */
+form h1 {
+    font-family: var(--fuente-titulo);
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: var(--texto);
+}
+
+.subtitulo {
+    margin: 8px auto 26px;
+    max-width: 30ch;
+    font-size: 14.5px;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+/* ---------- Mensaje de error ---------- */
+.error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--error);
+
+    background: var(--error-fondo);
+    border: 1px solid #F1C4D2;
+    border-radius: 12px;
+    animation: sacudir 0.4s ease;
+}
+
+.error svg {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+@keyframes sacudir {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ---------- Campos ---------- */
+.campo {
+    display: block;
+    margin-bottom: 18px;
+}
+
+.etiqueta {
+    display: block;
+    margin: 0 0 7px 3px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--texto);
+}
+
+.entrada {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Iconos (SVG de línea) */
+.entrada svg {
+    fill: none;
+    stroke: var(--texto-suave);
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.entrada > svg {
+    position: absolute;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    transition: stroke 0.25s ease;
+}
+
+.entrada:focus-within > svg {
+    stroke: var(--primario-oscuro);
+}
+
 form input {
     width: 100%;
     height: 54px;
-    padding: 0 16px;
-    margin-bottom: 18px;
+    padding: 0 16px 0 46px;
 
     font-family: inherit;
     font-size: 16px;
@@ -98,10 +221,15 @@ form input {
 
     background: var(--fondo-2);
     border: 1px solid var(--borde);
-    border-radius: 13px;
+    border-radius: 14px;
     outline: none;
 
-    transition: all 0.25s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+form input[type="password"],
+form input#clave {
+    padding-right: 50px;
 }
 
 form input::placeholder {
@@ -115,81 +243,119 @@ form input:hover {
 form input:focus {
     background: var(--blanco);
     border-color: var(--primario);
-    box-shadow: 0 0 0 4px rgba(201, 120, 153, 0.13);
+    box-shadow: 0 0 0 4px rgba(201, 120, 153, 0.15);
 }
 
-/* Botón */
-form button {
+/* Botón de ver clave */
+.ojo {
+    position: absolute;
+    right: 6px;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.ojo svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ojo:hover {
+    background: var(--acento);
+}
+
+.ojo.activo svg {
+    stroke: var(--primario-oscuro);
+}
+
+.ojo:focus-visible {
+    outline: 3px solid #D9A6BC;
+    outline-offset: 1px;
+}
+
+/* ---------- Botón principal ---------- */
+#btnIngresar {
     width: 100%;
     min-height: 54px;
-    margin-top: 5px;
+    margin-top: 8px;
 
     font-family: inherit;
     font-size: 17px;
     font-weight: 600;
     color: var(--blanco);
 
-    background: linear-gradient(
-        135deg,
-        var(--primario),
-        var(--primario-oscuro)
-    );
-
+    background: linear-gradient(135deg, var(--primario), var(--primario-oscuro));
     border: none;
-    border-radius: 13px;
+    border-radius: 14px;
     cursor: pointer;
 
-    box-shadow: 0 7px 15px rgba(201, 120, 153, 0.18);
-    transition: all 0.25s ease;
+    box-shadow: 0 8px 18px rgba(173, 88, 123, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-form button:hover {
+#btnIngresar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(173, 88, 123, 0.25);
+    box-shadow: 0 12px 24px rgba(173, 88, 123, 0.3);
     filter: brightness(1.04);
 }
 
-form button:active {
+#btnIngresar:active {
     transform: scale(0.98);
 }
 
-form button:focus-visible {
+#btnIngresar:focus-visible {
     outline: 3px solid #D9A6BC;
     outline-offset: 3px;
 }
 
-/* Tablets y móviles */
+/* ---------- Responsive ---------- */
 @media (max-width: 760px) {
     .caja {
         padding: 18px;
     }
 
     .caja form {
-        width: 100%;
-        max-width: 420px;
-        min-height: auto;
-        padding: 32px 24px;
+        padding: 34px 26px 30px;
     }
 
-    form img {
-        width: 125px;
+    .caja::after {
+        display: none;
     }
 }
 
-/* Móviles pequeños */
 @media (max-width: 380px) {
     .caja form {
         padding: 28px 18px;
-        border-radius: 20px;
+        border-radius: 22px;
+    }
+
+    form h1 {
+        font-size: 27px;
     }
 
     form input,
-    form button {
-        height: 48px;
+    #btnIngresar {
+        height: 50px;
+        min-height: 50px;
         font-size: 15px;
     }
 
     form img {
-        width: 105px;
+        width: 90px;
+    }
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
     }
 }
