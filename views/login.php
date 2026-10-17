@@ -46,14 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <div class="caja">
 
-            <!-- Panel izquierdo -->
+            <!-- Panel izquierdo: título, dibujo centrado y fórmulas -->
             <aside class="panel">
                 <h2>Calcule el área y el perímetro de la circunferencia</h2>
-
-                <div class="formulas">
-                    <p>A = πr²</p>
-                    <p>P = 2πr</p>
-                </div>
 
                 <svg class="dibujo" viewBox="0 0 300 300" aria-hidden="true">
                     <circle cx="150" cy="150" r="140"/>
@@ -61,14 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <circle cx="150" cy="150" r="60"/>
                     <line x1="150" y1="150" x2="290" y2="150" class="radio"/>
                     <circle cx="150" cy="150" r="5" class="centro"/>
-                    <text x="212" y="140">r</text>
+                    <text x="212" y="138">r</text>
                 </svg>
+
+                <div class="formulas">
+                    <p>A = πr²</p>
+                    <p>P = 2πr</p>
+                </div>
             </aside>
 
-            <!-- Formulario -->
+            <!-- Formulario (sin imagen arriba) -->
             <form action="" method="post" id="frmLogin" novalidate>
-                <img src="../imagenes/logo.jpg" alt="Logo de la institución">
-
                 <h1>Bienvenido(a)</h1>
                 <p class="subtitulo">Ingrese con su correo y su clave.</p>
 

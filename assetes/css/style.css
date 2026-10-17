@@ -1,5 +1,5 @@
 /* ============================== */
-/*   LOGIN v1.2 - PANEL DIVIDIDO  */
+/*   LOGIN v1.3 - PANEL DIVIDIDO  */
 /* ============================== */
 
 :root {
@@ -50,7 +50,7 @@ main {
     grid-template-columns: 1fr 1fr;
 
     width: min(960px, 100%);
-    min-height: 580px;
+    min-height: 600px;
 
     background: var(--blanco);
     border: 1px solid var(--borde);
@@ -61,21 +61,17 @@ main {
 
 /* ---------- Panel izquierdo ---------- */
 .panel {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 28px;
+    align-items: center;
     padding: 44px 40px;
-    overflow: hidden;
 
     color: var(--blanco);
     background: linear-gradient(155deg, var(--primario) 0%, var(--primario-oscuro) 100%);
 }
 
 .panel h2 {
-    position: relative;
-    z-index: 1;
+    align-self: flex-start;
     max-width: 16ch;
     font-family: var(--fuente-titulo);
     font-size: 31px;
@@ -84,39 +80,17 @@ main {
     letter-spacing: -0.01em;
 }
 
-.formulas {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.formulas p {
-    width: fit-content;
-    padding: 10px 20px;
-
-    font-family: var(--fuente-titulo);
-    font-size: 24px;
-    font-weight: 600;
-
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 999px;
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-}
-
-/* Circunferencia dibujada (cortada por la esquina) */
+/* Circunferencia: ocupa el espacio libre y queda centrada */
 .dibujo {
-    position: absolute;
-    right: -40px;
-    bottom: -90px;
-    width: 340px;
-    height: 340px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 300px;
+    margin: 24px 0;
+
     fill: none;
-    stroke: rgba(255, 255, 255, 0.4);
-    stroke-width: 1.5;
+    stroke: rgba(255, 255, 255, 0.65);
+    stroke-width: 2;
 }
 
 .dibujo circle:first-child {
@@ -142,6 +116,28 @@ main {
     font-style: italic;
 }
 
+/* Fórmulas en la parte baja, una al lado de la otra */
+.formulas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.formulas p {
+    padding: 10px 20px;
+
+    font-family: var(--fuente-titulo);
+    font-size: 24px;
+    font-weight: 600;
+
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
 /* ---------- Formulario ---------- */
 .caja form {
     display: flex;
@@ -150,28 +146,16 @@ main {
     padding: 44px 46px;
 }
 
-form img {
-    align-self: flex-start;
-    width: 84px;
-    height: 84px;
-    object-fit: cover;
-    border-radius: 50%;
-    padding: 4px;
-    margin-bottom: 20px;
-    background: var(--blanco);
-    box-shadow: 0 0 0 1px var(--borde), 0 8px 18px rgba(201, 120, 153, 0.2);
-}
-
 form h1 {
     font-family: var(--fuente-titulo);
-    font-size: 34px;
+    font-size: 36px;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--texto);
 }
 
 .subtitulo {
-    margin: 6px 0 26px;
+    margin: 6px 0 28px;
     font-size: 15px;
     line-height: 1.5;
     color: var(--texto-suave);
@@ -370,17 +354,20 @@ form input:focus {
 
     .panel {
         padding: 28px 26px;
-        gap: 16px;
     }
 
     .panel h2 {
+        align-self: center;
         max-width: none;
         font-size: 22px;
+        text-align: center;
     }
 
-    .formulas {
-        flex-direction: row;
-        flex-wrap: wrap;
+    .dibujo {
+        flex: none;
+        width: 170px;
+        height: 170px;
+        margin: 18px 0;
     }
 
     .formulas p {
@@ -388,20 +375,12 @@ form input:focus {
         font-size: 19px;
     }
 
-    .dibujo {
-        width: 150px;
-        height: 150px;
-        right: 18px;
-        bottom: 18px;
-    }
-
     .caja form {
         padding: 32px 26px 30px;
     }
 
-    form img {
-        width: 72px;
-        height: 72px;
+    form h1 {
+        font-size: 30px;
     }
 }
 
@@ -415,7 +394,7 @@ form input:focus {
     }
 
     form h1 {
-        font-size: 28px;
+        font-size: 27px;
     }
 
     form input,
