@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="" method="post" id="frmLogin" novalidate>
                 <img src="../imagenes/logo.jpg" alt="Logo de la institución">
 
-                <h1>Bienvenida</h1>
+                <h1>Bienvenido(a)</h1>
                 <p class="subtitulo">Ingrese con su correo y su clave.</p>
 
                 <?php if ($mensaje !== '') : ?>
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span class="etiqueta">Correo</span>
                     <span class="entrada">
                         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 8 8 5.5L20 8"/></svg>
-                        <input type="email" name="correo" id="correo" placeholder="nombre@correo.com"
+                        <input type="email" name="correo" id="correo" placeholder="Ingrese su email"
                                value="<?php echo htmlspecialchars($correo, ENT_QUOTES, 'UTF-8'); ?>"
                                autocomplete="email" required>
                     </span>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span class="etiqueta">Clave</span>
                     <span class="entrada">
                         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>
-                        <input type="password" name="clave" id="clave" placeholder="Su clave"
+                        <input type="password" name="clave" id="clave" placeholder="Ingrese su clave"
                                autocomplete="current-password" required>
                         <button type="button" class="ojo" id="btnVer" aria-label="Mostrar clave">
                             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></svg>
@@ -106,17 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </main>
 
-    <script>
-        // Mostrar / ocultar clave
-        const btnVer = document.getElementById('btnVer');
-        const clave = document.getElementById('clave');
-        btnVer.addEventListener('click', () => {
-            const oculta = clave.type === 'password';
-            clave.type = oculta ? 'text' : 'password';
-            btnVer.setAttribute('aria-label', oculta ? 'Ocultar clave' : 'Mostrar clave');
-            btnVer.classList.toggle('activo', oculta);
-        });
-    </script>
     <script src="../assetes/js/app.js"></script>
 </body>
 </html>

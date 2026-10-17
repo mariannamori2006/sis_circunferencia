@@ -44,3 +44,19 @@ function calcularCircunferencia() {
     campoArea.value = area.toFixed(4);
     campoPerimetro.value = perimetro.toFixed(4);
 }
+
+// Mostrar / ocultar clave
+document.addEventListener('DOMContentLoaded', () => {
+    const btnVer = document.getElementById('btnVer');
+    const clave = document.getElementById('clave');
+
+    if (!btnVer || !clave) return;
+
+    btnVer.addEventListener('click', () => {
+        const oculta = clave.type === 'password';
+
+        clave.type = oculta ? 'text' : 'password';
+        btnVer.setAttribute('aria-label', oculta ? 'Ocultar clave' : 'Mostrar clave');
+        btnVer.classList.toggle('activo', oculta);
+    });
+});

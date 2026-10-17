@@ -110,7 +110,7 @@ main {
 /* Circunferencia dibujada (cortada por la esquina) */
 .dibujo {
     position: absolute;
-    right: -90px;
+    right: -40px;
     bottom: -90px;
     width: 340px;
     height: 340px;
@@ -119,9 +119,13 @@ main {
     stroke-width: 1.5;
 }
 
+.dibujo circle:first-child {
+    fill: rgba(255, 255, 255, 0.1);
+}
+
 .dibujo .radio {
     stroke: var(--blanco);
-    stroke-width: 2.5;
+    stroke-width: 3;
     stroke-linecap: round;
 }
 
@@ -134,7 +138,7 @@ main {
     fill: var(--blanco);
     stroke: none;
     font-family: var(--fuente-titulo);
-    font-size: 22px;
+    font-size: 26px;
     font-style: italic;
 }
 
@@ -385,10 +389,10 @@ form input:focus {
     }
 
     .dibujo {
-        width: 220px;
-        height: 220px;
-        right: -70px;
-        bottom: -80px;
+        width: 150px;
+        height: 150px;
+        right: 18px;
+        bottom: 18px;
     }
 
     .caja form {
